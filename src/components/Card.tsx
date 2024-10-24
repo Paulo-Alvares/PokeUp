@@ -1,36 +1,94 @@
-import iconType1 from "../assets/type-icons/fire.svg";
-import iconType2 from "../assets/type-icons/flying.svg";
 import backgroundCard from "../assets/backgroundCard.svg";
-import pokemon from "../assets/pokemon_example.png";
+import bugType from "../assets/type-icons/bug.svg";
+import darkType from "../assets/type-icons/dark.svg";
+import dragonType from "../assets/type-icons/dragon.svg";
+import electricType from "../assets/type-icons/electric.svg";
+import fairyType from "../assets/type-icons/fairy.svg";
+import fightingType from "../assets/type-icons/fighting.svg";
+import fireType from "../assets/type-icons/fire.svg";
+import flyingType from "../assets/type-icons/flying.svg";
+import ghostType from "../assets/type-icons/ghost.svg";
+import grassType from "../assets/type-icons/grass.svg";
+import groundType from "../assets/type-icons/ground.svg";
+import iceType from "../assets/type-icons/ice.svg";
+import normalType from "../assets/type-icons/normal.svg";
+import poisonType from "../assets/type-icons/poison.svg";
+import psychicType from "../assets/type-icons/psychic.svg";
+import rockType from "../assets/type-icons/rock.svg";
+import steelType from "../assets/type-icons/steel.svg";
+import waterType from "../assets/type-icons/water.svg";
 
-export function Card() {
+interface CardProps {
+  primaryType: string;
+  secondaryType: string | null;
+  number: string;
+  name: string;
+  image: string;
+}
+
+export function Card({
+  primaryType,
+  secondaryType,
+  number,
+  name,
+  image,
+}: CardProps) {
+  const typeIcons: { [key: string]: { icon: string; color: string } } = {
+    bug: { icon: bugType, color: "#a6b71a" },
+    dark: { icon: darkType, color: "#725744" },
+    dragon: { icon: dragonType, color: "#7238f6" },
+    electric: { icon: electricType, color: "#ebd23d" },
+    fairy: { icon: fairyType, color: "#dfa5df" },
+    fighting: { icon: fightingType, color: "#bb3327" },
+    fire: { icon: fireType, color: "#f77d33" },
+    flying: { icon: flyingType, color: "#a58de1" },
+    ghost: { icon: ghostType, color: "#72589d" },
+    grass: { icon: grassType, color: "#75c558" },
+    ground: { icon: groundType, color: "#dac765" },
+    ice: { icon: iceType, color: "#99d8d5" },
+    normal: { icon: normalType, color: "#ada878" },
+    poison: { icon: poisonType, color: "#9f439a" },
+    psychic: { icon: psychicType, color: "#e76283" },
+    rock: { icon: rockType, color: "#b7a133" },
+    steel: { icon: steelType, color: "#b6b9d1" },
+    water: { icon: waterType, color: "#688fef" },
+  };
+
   return (
-    <div className="max-w-[calc(100%-65px)] mx-auto grid grid-cols-6 gap-7">
-      <div className="bg-white h-60 p-4 rounded-[35px] flex flex-col items-center justify-center relative shadow-[3.1px_3.1px_22.6px_rgba(0,0,0,0.1),8.7px_8.7px_62.6px_rgba(0,0,0,0.065),21.8px_21.8px_150.7px_rgba(0,0,0,0.05),68px_68px_500px_rgba(0,0,0,0.035)]">
-        <div className="flex gap-3">
-          <div className="bg-[#FF9D55] w-8 h-8 rounded-full flex justify-center items-center">
-            <img className="w-[65%]" src={iconType1} alt="" />
-          </div>
-          <div className="bg-[#89AAE3] w-8 h-8 rounded-full flex justify-center items-center">
-            <img className="w-[65%]" src={iconType2} alt="" />
-          </div>
+    <div className="bg-white h-60 rounded-[35px] p-2 flex flex-col items-center justify-center relative shadow-[3.1px_3.1px_22.6px_rgba(0,0,0,0.1),8.7px_8.7px_62.6px_rgba(0,0,0,0.065),21.8px_21.8px_150.7px_rgba(0,0,0,0.05),68px_68px_500px_rgba(0,0,0,0.035)] hover:shadow-[3.1px_3.1px_22.6px_rgba(0,0,0,0.1),8.7px_8.7px_62.6px_rgba(0,0,0,0.065),21.8px_21.8px_150.7px_rgba(0,0,0,0.05),68px_68px_500px_rgba(0,0,0,0.035), 0_10px_30px_rgba(0,0,0,0.15)] hover:-translate-y-2 duration-300">
+      <div className="flex gap-3">
+        <div
+          className={"w-8 h-8 rounded-full flex justify-center items-center"}
+          style={{ backgroundColor: typeIcons[primaryType].color }}
+        >
+          <img
+            className="w-[60%]"
+            src={typeIcons[primaryType].icon}
+            alt={primaryType}
+          />
         </div>
-
-        <img
-          src={backgroundCard}
-          alt="background"
-          className="inset-0 w-[70%] mt-3 object-center"
-        />
-
-        <img src={pokemon} alt="Pokémon" className="absolute w-[80%] z-10" />
-
-        <div className="mt-4">
-          <p className="text-lg font-semibold">
-            <span className="text-gray-500 text-sm font-semibold">#0001</span>{" "}
-            Charizard
-          </p>
-        </div>
+        {secondaryType && (
+          <div
+            className={"w-8 h-8 rounded-full flex justify-center items-center"}
+            style={{ backgroundColor: typeIcons[secondaryType].color }}
+          >
+            <img
+              className="w-[60%]"
+              src={typeIcons[secondaryType].icon}
+              alt={secondaryType}
+            />
+          </div>
+        )}
       </div>
+
+      <img src={backgroundCard} alt="background" className="w-[55%] my-4" />
+
+      <img src={image} alt={name} className="absolute h-[60%] z-10" />
+
+      <p className="text-lg font-semibold capitalize">
+        <span className="text-gray-500 text-xs font-semibold">#{number}</span>{" "}
+        {name}
+      </p>
     </div>
   );
 }

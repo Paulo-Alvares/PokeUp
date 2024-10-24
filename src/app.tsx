@@ -1,6 +1,6 @@
-import { Card } from "./components/Card";
 import { Filtering } from "./components/Filtering";
 import { Navbar } from "./components/Navbar";
+import { Pokedex } from "./components/Pokedex";
 
 export function App() {
   return (
@@ -8,7 +8,7 @@ export function App() {
       <div className="">
         <Navbar />
         <Filtering />
-        <Card />
+        <Pokedex />
       </div>
     </>
   );
