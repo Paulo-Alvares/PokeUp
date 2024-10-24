@@ -1,4 +1,5 @@
 import backgroundCard from "../assets/backgroundCard.svg";
+import backgroundCardDark from "../assets/backgroundCardDark.svg";
 import bugType from "../assets/type-icons/bug.svg";
 import darkType from "../assets/type-icons/dark.svg";
 import dragonType from "../assets/type-icons/dragon.svg";
@@ -17,6 +18,7 @@ import psychicType from "../assets/type-icons/psychic.svg";
 import rockType from "../assets/type-icons/rock.svg";
 import steelType from "../assets/type-icons/steel.svg";
 import waterType from "../assets/type-icons/water.svg";
+import { useTheme } from "../Context/ThemeContext";
 
 interface CardProps {
   primaryType: string;
@@ -33,6 +35,8 @@ export function Card({
   name,
   image,
 }: CardProps) {
+  const { theme } = useTheme();
+
   const typeIcons: { [key: string]: { icon: string; color: string } } = {
     bug: { icon: bugType, color: "#a6b71a" },
     dark: { icon: darkType, color: "#725744" },
@@ -55,7 +59,7 @@ export function Card({
   };
 
   return (
-    <div className="bg-white h-60 rounded-[35px] p-2 flex flex-col items-center justify-center relative shadow-[3.1px_3.1px_22.6px_rgba(0,0,0,0.1),8.7px_8.7px_62.6px_rgba(0,0,0,0.065),21.8px_21.8px_150.7px_rgba(0,0,0,0.05),68px_68px_500px_rgba(0,0,0,0.035)] hover:shadow-[3.1px_3.1px_22.6px_rgba(0,0,0,0.1),8.7px_8.7px_62.6px_rgba(0,0,0,0.065),21.8px_21.8px_150.7px_rgba(0,0,0,0.05),68px_68px_500px_rgba(0,0,0,0.035), 0_10px_30px_rgba(0,0,0,0.15)] hover:-translate-y-2 duration-300">
+    <div className="bg-white dark:bg-[#2C2C2C] dark:text-white h-60 rounded-[35px] p-2 flex flex-col items-center justify-center relative shadow-[2px_4px_11px_rgba(0,0,0,0.25)] hover:-translate-y-2 duration-300 cursor-pointer">
       <div className="flex gap-3">
         <div
           className={"w-8 h-8 rounded-full flex justify-center items-center"}
@@ -81,7 +85,15 @@ export function Card({
         )}
       </div>
 
-      <img src={backgroundCard} alt="background" className="w-[55%] my-4" />
+      {theme === "light" ? (
+        <img src={backgroundCard} alt="background" className="w-[55%] my-4" />
+      ) : (
+        <img
+          src={backgroundCardDark}
+          alt="background"
+          className="w-[55%] my-4"
+        />
+      )}
 
       <img src={image} alt={name} className="absolute h-[60%] z-10" />
 
