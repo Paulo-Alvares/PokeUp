@@ -12,13 +12,15 @@ export function Navbar() {
         <nav className="flex gap-32 text-lg font-semibold">
           <ul className="flex gap-12">
             <a href="">
-              <li className="hover:text-[#DD2C00] transition-colors duration-300">
+              <li className="hover:text-[#DD2C00] transition-colors duration-300 group">
                 PokeDéx
+                <div className="bg-[#DD2C00] w-0 h-[1.5px] rounded-full transition-all duration-300 ease-in-out group-hover:w-full"></div>
               </li>
             </a>
             <a href="">
-              <li className="hover:text-[#DD2C00] transition-colors duration-300">
+              <li className="hover:text-[#DD2C00] transition-colors duration-300 group">
                 Contato
+                <div className="bg-[#DD2C00] w-0 h-[1.5px] rounded-full transition-all duration-300 ease-in-out group-hover:w-full"></div>
               </li>
             </a>
           </ul>

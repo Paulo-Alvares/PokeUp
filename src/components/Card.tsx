@@ -23,7 +23,7 @@ import { useTheme } from "../Context/ThemeContext";
 interface CardProps {
   primaryType: string;
   secondaryType: string | null;
-  number: string;
+  number: number;
   name: string;
   image: string;
 }
