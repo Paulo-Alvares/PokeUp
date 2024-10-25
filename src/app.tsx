@@ -1,5 +1,4 @@
-import { Navbar } from "./components/Navbar";
-import { Pokedex } from "./components/Pokedex";
+import { Outlet } from "react-router-dom";
 import { ThemeProvider } from "./Context/ThemeContext";
 
 export function App() {
@@ -7,8 +6,7 @@ export function App() {
     <>
       <div className="">
         <ThemeProvider>
-          <Navbar />
-          <Pokedex />
+          <Outlet />
         </ThemeProvider>
       </div>
     </>

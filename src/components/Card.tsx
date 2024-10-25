@@ -28,6 +28,27 @@ interface CardProps {
   image: string;
 }
 
+const typeIcons: { [key: string]: { icon: string; color: string } } = {
+  bug: { icon: bugType, color: "#a6b71a" },
+  dark: { icon: darkType, color: "#725744" },
+  dragon: { icon: dragonType, color: "#7238f6" },
+  electric: { icon: electricType, color: "#ebd23d" },
+  fairy: { icon: fairyType, color: "#dfa5df" },
+  fighting: { icon: fightingType, color: "#bb3327" },
+  fire: { icon: fireType, color: "#f77d33" },
+  flying: { icon: flyingType, color: "#a58de1" },
+  ghost: { icon: ghostType, color: "#72589d" },
+  grass: { icon: grassType, color: "#75c558" },
+  ground: { icon: groundType, color: "#dac765" },
+  ice: { icon: iceType, color: "#99d8d5" },
+  normal: { icon: normalType, color: "#ada878" },
+  poison: { icon: poisonType, color: "#9f439a" },
+  psychic: { icon: psychicType, color: "#e76283" },
+  rock: { icon: rockType, color: "#b7a133" },
+  steel: { icon: steelType, color: "#b6b9d1" },
+  water: { icon: waterType, color: "#688fef" },
+};
+
 export function Card({
   primaryType,
   secondaryType,
@@ -36,27 +57,6 @@ export function Card({
   image,
 }: CardProps) {
   const { theme } = useTheme();
-
-  const typeIcons: { [key: string]: { icon: string; color: string } } = {
-    bug: { icon: bugType, color: "#a6b71a" },
-    dark: { icon: darkType, color: "#725744" },
-    dragon: { icon: dragonType, color: "#7238f6" },
-    electric: { icon: electricType, color: "#ebd23d" },
-    fairy: { icon: fairyType, color: "#dfa5df" },
-    fighting: { icon: fightingType, color: "#bb3327" },
-    fire: { icon: fireType, color: "#f77d33" },
-    flying: { icon: flyingType, color: "#a58de1" },
-    ghost: { icon: ghostType, color: "#72589d" },
-    grass: { icon: grassType, color: "#75c558" },
-    ground: { icon: groundType, color: "#dac765" },
-    ice: { icon: iceType, color: "#99d8d5" },
-    normal: { icon: normalType, color: "#ada878" },
-    poison: { icon: poisonType, color: "#9f439a" },
-    psychic: { icon: psychicType, color: "#e76283" },
-    rock: { icon: rockType, color: "#b7a133" },
-    steel: { icon: steelType, color: "#b6b9d1" },
-    water: { icon: waterType, color: "#688fef" },
-  };
 
   return (
     <div className="bg-white dark:bg-[#2C2C2C] dark:text-white h-60 rounded-[35px] p-2 flex flex-col items-center justify-center relative shadow-[2px_4px_11px_rgba(0,0,0,0.25)] hover:-translate-y-2 duration-300 cursor-pointer">
@@ -91,13 +91,13 @@ export function Card({
         <img
           src={backgroundCardDark}
           alt="background"
-          className="w-[55%] my-4"
+          className="w-[55%] h-[55%] my-4"
         />
       )}
 
       <img src={image} alt={name} className="absolute h-[60%] z-10" />
 
-      <p className="text-lg font-semibold capitalize">
+      <p className="text-lg font-semibold capitalize whitespace-nowrap overflow-hidden text-ellipsis max-w-[80%]">
         <span className="text-gray-500 text-xs font-semibold">#{number}</span>{" "}
         {name}
       </p>
