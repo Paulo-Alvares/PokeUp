@@ -14,7 +14,7 @@ export function Navbar({ redirectPage }: NavbarProps) {
 
   return (
     <>
-      <header className="bg-white text-black dark:bg-[#2C2C2C] dark:text-white inset-x-0 w-full max-w-[calc(100%-65px)] mx-auto my-7 py-4 pl-16 pr-20 rounded-[35px] flex justify-between items-center shadow-[2px_4px_11px_rgba(0,0,0,0.25)]">
+      <header className="bg-white  text-black dark:bg-[#2C2C2C] dark:text-white inset-x-0 w-full max-w-[calc(100%-65px)] mx-auto my-7 py-4 pl-16 pr-20 rounded-[35px] flex justify-between items-center shadow-[2px_4px_11px_rgba(0,0,0,0.25)]">
         <Link to={redirectPage ?? "/"}>
           <img className="h-[72px]" src={logo} alt="Logo" />
         </Link>

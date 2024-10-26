@@ -97,7 +97,7 @@ export function Card({
 
       <img src={image} alt={name} className="absolute h-[60%] z-10" />
 
-      <p className="text-lg font-semibold capitalize whitespace-nowrap overflow-hidden text-ellipsis max-w-[80%]">
+      <p className="text-lg font-semibold capitalize whitespace-nowrap overflow-hidden text-ellipsis max-w-[80%] flex items-center gap-1">
         <span className="text-gray-500 text-xs font-semibold">#{number}</span>{" "}
         {name}
       </p>

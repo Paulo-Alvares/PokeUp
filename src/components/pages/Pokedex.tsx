@@ -67,15 +67,15 @@ export function Pokedex() {
 
       <main className="max-w-[calc(100%-65px)] h-auto mx-auto">
         <div className="w-full mx-auto my-7 flex justify-between items-center gap-7">
-          <div className="bg-white dark:bg-[#2C2C2C] dark:text-white w-[calc(60%-11px)] h-11 rounded-full flex items-center gap-2 shadow-[2px_4px_11px_rgba(0,0,0,0.25)]">
+          <div className="bg-white dark:bg-[#2C2C2C] dark:text-white w-[calc(60%-11px)] sm:w-[calc(50%-11px)] h-11 rounded-full flex items-center gap-2 shadow-[2px_4px_11px_rgba(0,0,0,0.25)]">
             <label htmlFor="search">
-              <MagnifyingGlass size={17} weight="bold" className="mx-8" />
+              <MagnifyingGlass size={17} weight="bold" className="mx-8 sm:mr-0" />
             </label>
             <input
               type="search"
               id="search"
               placeholder="Procure um pokémon por aqui..."
-              className="dark:bg-[#2C2C2C] dark:text-white w-[82%] text-base font-semibold placeholder-[#9B9B9B] outline-none"
+              className="dark:bg-[#2C2C2C] dark:text-white w-[82%] sm:w-[calc(67%)] md:w-[65%] text-base font-semibold placeholder-[#9B9B9B] outline-none"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -104,7 +104,7 @@ export function Pokedex() {
           </div>
         </div>
 
-        <div className="w-full grid grid-cols-5 gap-7 mb-[32px]">
+        <div className="w-full grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-7 mb-[32px] 2xl:grid-cols-6 min-[1700px]:grid-cols-7">
           {isLoading ? (
             <div className="flex justify-center items-center col-span-5">
               <img src={loader} alt="loader" className="w-24 loader" />
