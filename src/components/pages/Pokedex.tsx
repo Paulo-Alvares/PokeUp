@@ -66,7 +66,7 @@ export function Pokedex() {
       <Navbar />
 
       <main className="max-w-[95%] mx-auto flex flex-col gap-7">
-        <div className="w-full grid gap-7 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5">
+        <div className="w-full grid gap-7 grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           <div className="col-span-3 md:col-span-2 flex items-center bg-white dark:bg-[#2C2C2C] dark:text-white h-11 rounded-full shadow-md px-4">
             <MagnifyingGlass size={17} weight="bold" />
             <input
@@ -79,7 +79,7 @@ export function Pokedex() {
             />
           </div>
 
-          <div className="col-span-3 md:col-span-1 lg:col-start-5 flex items-center bg-white dark:bg-[#2C2C2C] dark:text-white h-11 rounded-full shadow-md px-4">
+          <div className="col-span-3 md:col-span-1 lg:col-start-4 xl:col-start-5 flex items-center bg-white dark:bg-[#2C2C2C] dark:text-white h-11 rounded-full shadow-md px-4">
             <Funnel size={17} weight="bold" />
             <select
               id="selection"
@@ -96,7 +96,7 @@ export function Pokedex() {
           </div>
         </div>
 
-        <div className="w-full grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-7 mb-[32px]">
+        <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-7 mb-[32px]">
           {isLoading ? (
             <div className="flex justify-center items-center col-span-5">
               <img src={loader} alt="loader" className="w-24 loader" />

@@ -89,22 +89,17 @@ export function Card({
         {theme === "light" ? (
           <img src={backgroundCard} alt="background" className="h-[75%]" />
         ) : (
-          <img
-            src={backgroundCardDark}
-            alt="background"
-            className="h-[75%]"
-          />
+          <img src={backgroundCardDark} alt="background" className="h-[75%]" />
         )}
 
         <img src={image} alt={name} className="absolute h-[90%] z-10" />
       </div>
 
-      {/* Nome e número */}
-      <p className="text-lg font-semibold capitalize whitespace-nowrap overflow-hidden text-ellipsis max-w-[80%] flex items-center gap-1">
-        <span className="text-gray-500 text-xs font-semibold">
+      <p className="text-lg font-semibold capitalize max-w-[90%] flex justify-between items-center overflow-hidden whitespace-nowrap">
+        <span className="text-gray-500 text-xs font-semibold m-1 shrink-0">
           #{number}
-        </span>{" "}
-        {name}
+        </span>
+        <span className="overflow-hidden text-ellipsis">{name}</span>
       </p>
     </div>
   );
