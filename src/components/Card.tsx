@@ -59,10 +59,10 @@ export function Card({
   const { theme } = useTheme();
 
   return (
-    <div className="bg-white dark:bg-[#2C2C2C] dark:text-white h-60 rounded-[35px] p-2 flex flex-col items-center justify-center relative shadow-[2px_4px_11px_rgba(0,0,0,0.25)] hover:-translate-y-2 duration-300 cursor-pointer">
+    <div className="bg-white dark:bg-[#2C2C2C] dark:text-white h-60 rounded-[35px] p-4 flex flex-col items-center justify-between relative shadow-[2px_4px_11px_rgba(0,0,0,0.25)] hover:-translate-y-2 duration-300 cursor-pointer">
       <div className="flex gap-3">
         <div
-          className={"w-8 h-8 rounded-full flex justify-center items-center"}
+          className="w-8 h-8 rounded-full flex justify-center items-center"
           style={{ backgroundColor: typeIcons[primaryType].color }}
         >
           <img
@@ -73,7 +73,7 @@ export function Card({
         </div>
         {secondaryType && (
           <div
-            className={"w-8 h-8 rounded-full flex justify-center items-center"}
+            className="w-8 h-8 rounded-full flex justify-center items-center"
             style={{ backgroundColor: typeIcons[secondaryType].color }}
           >
             <img
@@ -85,20 +85,25 @@ export function Card({
         )}
       </div>
 
-      {theme === "light" ? (
-        <img src={backgroundCard} alt="background" className="w-[55%] my-4" />
-      ) : (
-        <img
-          src={backgroundCardDark}
-          alt="background"
-          className="w-[55%] h-[55%] my-4"
-        />
-      )}
+      <div className="relative w-full flex items-center justify-center">
+        {theme === "light" ? (
+          <img src={backgroundCard} alt="background" className="h-[75%]" />
+        ) : (
+          <img
+            src={backgroundCardDark}
+            alt="background"
+            className="h-[75%]"
+          />
+        )}
 
-      <img src={image} alt={name} className="absolute h-[60%] z-10" />
+        <img src={image} alt={name} className="absolute h-[90%] z-10" />
+      </div>
 
+      {/* Nome e número */}
       <p className="text-lg font-semibold capitalize whitespace-nowrap overflow-hidden text-ellipsis max-w-[80%] flex items-center gap-1">
-        <span className="text-gray-500 text-xs font-semibold">#{number}</span>{" "}
+        <span className="text-gray-500 text-xs font-semibold">
+          #{number}
+        </span>{" "}
         {name}
       </p>
     </div>
