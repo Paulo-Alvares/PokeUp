@@ -14,7 +14,7 @@ export function Navbar({ redirectPage }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white text-black dark:bg-[#2C2C2C] dark:text-white h-24 max-w-[95%] mx-auto my-4 py-4 px-10 rounded-[35px] flex justify-between items-center shadow-md relative">
+    <header className="bg-white text-black dark:bg-[#2C2C2C] dark:text-white h-24 max-w-[95%] mx-auto my-7 py-4 px-10 rounded-[35px] flex justify-between items-center shadow-md relative">
       <Link to={redirectPage ?? "/"}>
         <img className="h-16" src={logo} alt="Logo" />
       </Link>
