@@ -12,13 +12,15 @@ export function Contact() {
     <>
       <Navbar />
 
-      <main className="max-w-[calc(100%-65px)] h-auto mx-auto flex justify-evenly">
-        <div className="w-[35%] bg-white dark:bg-[#2C2C2C] mr-7 p-5 rounded-full flex justify-center items-center shadow-[2px_4px_11px_rgba(0,0,0,0.25)]">
-          <img src={me} alt="Foto do Autor" />
-        </div>
+      <main className="max-w-[calc(100%-65px)] mx-auto flex flex-col lg:flex-row justify-evenly items-center lg:items-start p-5">
+        <img
+          src={me}
+          alt="Foto do Autor"
+          className="w-3/4 sm:w-1/2 lg:w-[35%] rounded-full border-solid border-[20px] border-white dark:border-[#2C2C2C] shadow-[2px_4px_11px_rgba(0,0,0,0.25)] mb-5 lg:mb-0"
+        />
 
-        <div className="max-w-[55%] bg-white dark:bg-[#2C2C2C] dark:text-white p-10 rounded-[35px] flex flex-col font-semibold justify-between items-center shadow-[2px_4px_11px_rgba(0,0,0,0.25)]">
-          <p className="text-lg text-justify">
+        <div className="w-full lg:max-w-[55%] bg-white dark:bg-[#2C2C2C] dark:text-white p-6 sm:p-10 rounded-[35px] flex flex-col font-semibold justify-between items-center shadow-[2px_4px_11px_rgba(0,0,0,0.25)]">
+          <p className="text-sm sm:text-base lg:text-lg text-justify mb-6">
             Olá! Meu nome é Paulo Alvares, sou desenvolvedor full stack formado
             em Análise e Desenvolvimento de Sistemas, com experiência em
             tecnologias como TypeScript, Node.js, React, Python, Java e
@@ -29,30 +31,34 @@ export function Contact() {
             programação, fique à vontade para me contatar!
           </p>
 
-          <div className="w-full mb-10 h-12 flex justify-between">
+          <div className="w-full flex flex-wrap justify-between gap-4">
             <a
               href="https://github.com/Paulo-Alvares"
-              className="w-[20%] bg-white text-black dark:bg-[#2C2C2C] dark:text-white hover:bg-black hover:text-white dark:hover:bg-black dark:hover:text-white flex items-center justify-center rounded-full shadow-[2px_4px_11px_rgba(0,0,0,0.25)] duration-300"
+              target="_blank"
+              className="w-1/4 sm:w-[22%] p-2 bg-white text-black dark:bg-[#2C2C2C] dark:text-white hover:bg-black hover:text-white dark:hover:bg-black dark:hover:text-white flex items-center justify-center rounded-full shadow-[2px_4px_11px_rgba(0,0,0,0.25)] duration-300"
             >
-              <GithubLogo className="text-4xl" />
+              <GithubLogo className="text-3xl sm:text-4xl" />
             </a>
             <a
               href="https://www.linkedin.com/in/paulo-alvares/"
-              className="w-[20%] bg-white text-black dark:bg-[#2C2C2C] dark:text-white hover:bg-[#0a66c2] hover:text-white dark:hover:bg-[#0a66c2] dark:hover:text-white flex items-center justify-center rounded-full shadow-[2px_4px_11px_rgba(0,0,0,0.25)] duration-300"
+              target="_blank"
+              className="w-1/4 sm:w-[22%] bg-white text-black dark:bg-[#2C2C2C] dark:text-white hover:bg-[#0a66c2] hover:text-white dark:hover:bg-[#0a66c2] dark:hover:text-white flex items-center justify-center rounded-full shadow-[2px_4px_11px_rgba(0,0,0,0.25)] duration-300"
             >
-              <LinkedinLogo className="text-4xl" />
+              <LinkedinLogo className="text-3xl sm:text-4xl" />
             </a>
             <a
-              href=""
-              className="w-[20%] bg-white text-black dark:bg-[#2C2C2C] dark:text-white hover:bg-red-600 hover:text-white dark:hover:bg-red-600 dark:hover:text-white flex items-center justify-center rounded-full shadow-[2px_4px_11px_rgba(0,0,0,0.25)] duration-300"
+              href="mailto:pauloalvares66@gmail.com"
+              target="_blank"
+              className="w-1/4 sm:w-[22%] bg-white text-black dark:bg-[#2C2C2C] dark:text-white hover:bg-red-600 hover:text-white dark:hover:bg-red-600 dark:hover:text-white flex items-center justify-center rounded-full shadow-[2px_4px_11px_rgba(0,0,0,0.25)] duration-300"
             >
-              <EnvelopeSimple className="text-4xl" />
+              <EnvelopeSimple className="text-3xl sm:text-4xl" />
             </a>
             <a
-              href=""
-              className="w-[20%] bg-white text-black dark:bg-[#2C2C2C] dark:text-white hover:bg-black hover:text-white dark:hover:bg-black dark:hover:text-white flex items-center justify-center rounded-full shadow-[2px_4px_11px_rgba(0,0,0,0.25)] duration-300"
+              href="https://codepen.io/Poulos-Alvares"
+              target="_blank"
+              className="w-1/4 sm:w-[22%] bg-white text-black dark:bg-[#2C2C2C] dark:text-white hover:bg-black hover:text-white dark:hover:bg-black dark:hover:text-white flex items-center justify-center rounded-full shadow-[2px_4px_11px_rgba(0,0,0,0.25)] duration-300"
             >
-              <CodepenLogo className="text-4xl" />
+              <CodepenLogo className="text-3xl sm:text-4xl" />
             </a>
           </div>
         </div>
