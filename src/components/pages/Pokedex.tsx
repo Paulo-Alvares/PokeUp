@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Card } from "../Card";
 import loader from "../../assets/backgroundCard.svg";
-import { Funnel, MagnifyingGlass } from "@phosphor-icons/react";
+import { CaretDown, Funnel, MagnifyingGlass } from "@phosphor-icons/react";
 import "../../index.css";
 import axios from "axios";
 import { Navbar } from "../Navbar";
@@ -36,6 +36,9 @@ export function Pokedex() {
   const [pokemonList, setPokemonList] = useState([] as Pokemon[]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => setIsOpen(!isOpen);
 
   useEffect(() => {
     const fetchPokemonByGeneration = async () => {
@@ -79,7 +82,7 @@ export function Pokedex() {
             />
           </div>
 
-          <div className="col-span-3 md:col-span-1 lg:col-start-4 xl:col-start-5 flex items-center bg-white dark:bg-[#2C2C2C] dark:text-white h-11 rounded-full shadow-md px-4">
+          {/* <div className="col-span-3 md:col-span-1 lg:col-start-4 xl:col-start-5 flex items-center bg-white dark:bg-[#2C2C2C] dark:text-white h-11 rounded-full shadow-md px-4">
             <Funnel size={17} weight="bold" />
             <select
               id="selection"
@@ -93,6 +96,32 @@ export function Pokedex() {
                 </option>
               ))}
             </select>
+          </div> */}
+          <div
+            onClick={toggleDropdown}
+            className="relative col-span-3 md:col-span-1 lg:col-start-4 xl:col-start-5 flex items-center bg-white dark:bg-[#2C2C2C] dark:text-white h-11 rounded-full shadow-md px-4 cursor-pointer font-semibold z-50 duration-300 hover:bg-[#DD2C00] hover:text-white"
+          >
+            <Funnel size={17} weight="bold" />
+            <div className="w-full text-center ml-2">
+              {generation}
+            </div>
+            {isOpen && (
+              <div className="absolute top-full left-0 w-full rounded-md dropdown">
+                {Object.keys(generationRanges).map((gen) => (
+                  <div
+                    key={gen}
+                    onClick={() => {
+                      setGeneration(gen);
+                      setIsOpen(false);
+                    }}
+                    className="bg-white dark:bg-[#2C2C2C] shadow-[2px_4px_11px_rgba(0,0,0,0.25)] text-center m-1 p-2 rounded-full cursor-pointer hover:-translate-y-2 text-black duration-300 hover:bg-[#DD2C00] hover:text-white"
+                  >
+                    {gen}
+                  </div>
+                ))}
+              </div>
+            )}
+            <CaretDown size={17} weight="bold" />
           </div>
         </div>
 
