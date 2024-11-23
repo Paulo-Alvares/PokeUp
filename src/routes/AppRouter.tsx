@@ -1,5 +1,5 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import { App }from "../App";
+import App from "../App";
 import { Pokedex } from "../components/pages/Pokedex";
 import { Contact } from "../components/pages/Contact";
 
