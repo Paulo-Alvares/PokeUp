@@ -1,6 +1,6 @@
 {
   "root": [
-    "./src/app.tsx",
+    "./src/App.tsx",
     "./src/main.tsx",
     "./src/vite-env.d.ts",
     "./src/context/themecontext.tsx",
