@@ -41,18 +41,30 @@ const typeIcons: { [key: string]: { icon: string; color: string } } = {
 
 interface StatsProps {
   advantages?: string[];
-  weaknesses: string[];
-  resistences: string[];
+  weaknesses?: string[];
+  resistences?: string[];
   immunities?: string[];
-  stats: {
-    hp: number;
-    attack: number;
-    defense: number;
-    specialAttack: number;
-    specialDefense: number;
-    speed: number;
-  };
+  ability: string;
+  description: string;
+  stats: Record<StatKeys, number>;
 }
+
+type StatKeys =
+  | "hp"
+  | "attack"
+  | "defense"
+  | "specialAttack"
+  | "specialDefense"
+  | "speed";
+
+const statLabels: Record<StatKeys, string> = {
+  hp: "Hp",
+  attack: "Atk",
+  defense: "Def",
+  specialAttack: "Sp. Atk",
+  specialDefense: "Sp. Def",
+  speed: "Speed",
+};
 
 export function Stats({
   advantages,
@@ -60,6 +72,8 @@ export function Stats({
   resistences,
   immunities,
   stats,
+  ability,
+  description,
 }: StatsProps) {
   const totalBase = useMemo(
     () =>
@@ -71,6 +85,15 @@ export function Stats({
       stats.speed,
     [stats]
   );
+
+  const statusRange = {
+    hp: { min: 1, max: 255 },
+    attack: { min: 0, max: 255 },
+    defense: { min: 0, max: 250 },
+    specialAttack: { min: 0, max: 255 },
+    specialDefense: { min: 0, max: 250 },
+    speed: { min: 0, max: 180 },
+  };
 
   const renderIcons = (typeList: string[]) => (
     <div className="grid grid-cols-3 gap-1">
@@ -87,67 +110,89 @@ export function Stats({
   );
 
   return (
-    <div className="h-3/5 flex gap-7 p-4 bg-white dark:bg-[#2C2C2C] rounded-[35px] shadow-[2px_4px_11px_rgba(0,0,0,0.25)]">
-      <div className="flex flex-col gap-4 overflow-scroll px-4">
+    <div className="h-1/2 flex gap-4 pt-3 px-7 bg-white dark:bg-[#2C2C2C] overflow-hidden rounded-[35px] shadow-[2px_4px_11px_rgba(0,0,0,0.25)]">
+      <div className="flex flex-col gap-4 overflow-scroll pr-3">
         {advantages && advantages.length > 0 && (
           <div>
-            <h3 className="text-lg font-semibold dark:text-white">Vantagens</h3>
+            <h3 className="text-lg font-semibold dark:text-white mb-1">Vantagens</h3>
             {renderIcons(advantages)}
           </div>
         )}
 
-        <div>
-          <h3 className="text-lg font-semibold dark:text-white">Fraquezas</h3>
-          {renderIcons(weaknesses)}
-        </div>
+        {weaknesses && weaknesses.length > 0 && (
+          <div>
+            <h3 className="text-lg font-semibold dark:text-white mb-1">Fraquezas</h3>
+            {renderIcons(weaknesses)}
+          </div>
+        )}
 
-        <div>
-          <h3 className="text-lg font-semibold dark:text-white">Resistências</h3>
-          {renderIcons(resistences)}
-        </div>
+        {resistences && resistences.length > 0 && (
+          <div>
+            <h3 className="text-lg font-semibold dark:text-white mb-1">
+              Resistências
+            </h3>
+            {renderIcons(resistences)}
+          </div>
+        )}
 
         {immunities && immunities.length > 0 && (
           <div>
-            <h3 className="text-lg font-semibold dark:text-white">Imunidades</h3>
+            <h3 className="text-lg font-semibold dark:text-white mb-1">
+              Imunidades
+            </h3>
             {renderIcons(immunities)}
           </div>
         )}
       </div>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 w-1/3">
+        <div>
+          <h3 className="text-lg font-semibold dark:text-white">Habilidade</h3>
+          <span className="dark:text-gray-300 capitalize">{ability}</span>
+        </div>
+
+        <div>
+          <h3 className="text-lg font-semibold dark:text-white">Descrição</h3>
+          <p className="dark:text-gray-300">{description}</p>
+        </div>
+      </div>
+
+      <div className="flex flex-col flex-1">
         <h3 className="text-lg font-semibold dark:text-white">Stats</h3>
-        <ul className="space-y-2">
-          <li className="flex justify-between">
-            <span className="font-medium dark:text-gray-300">HP:</span>
-            <span>{stats.hp}</span>
-          </li>
-          <li className="flex justify-between">
-            <span className="font-medium dark:text-gray-300">Attack:</span>
-            <span>{stats.attack}</span>
-          </li>
-          <li className="flex justify-between">
-            <span className="font-medium dark:text-gray-300">Defense:</span>
-            <span>{stats.defense}</span>
-          </li>
-          <li className="flex justify-between">
-            <span className="font-medium dark:text-gray-300">Sp. Attack:</span>
-            <span>{stats.specialAttack}</span>
-          </li>
-          <li className="flex justify-between">
-            <span className="font-medium dark:text-gray-300">Sp. Defense:</span>
-            <span>{stats.specialDefense}</span>
-          </li>
-          <li className="flex justify-between">
-            <span className="font-medium dark:text-gray-300">Speed:</span>
-            <span>{stats.speed}</span>
-          </li>
-          <li className="flex justify-between">
-            <span className="font-bold dark:text-gray-100">Total Base:</span>
-            <span className="font-bold">{totalBase}</span>
+        <ul className="flex flex-col font-semibold">
+          {Object.keys(stats).map((key) => {
+            const statKey = key as StatKeys;
+            const statValue = stats[statKey];
+            const statMin = statusRange[statKey].min;
+            const statMax = statusRange[statKey].max;
+            const progressBarWidth =
+              ((statValue - statMin) / (statMax - statMin)) * 100;
+
+            return (
+              <li className="flex h-1/6" key={statKey}>
+                <div className="flex items-center w-full gap-4">
+                  <span className="font-semibold dark:text-gray-300 w-1/5 text-right capitalize text-nowrap">
+                    {statLabels[statKey]}:
+                  </span>
+
+                  <div className="relative w-2/3 h-2 bg-gray-300 rounded-full overflow-hidden">
+                    <div
+                      className="absolute top-0 left-0 h-full bg-red-600 rounded-full duration-300"
+                      style={{ width: `${progressBarWidth}%` }}
+                    ></div>
+                  </div>
+
+                  <span>{statValue}</span>
+                </div>
+              </li>
+            );
+          })}
+          <li className="flex gap-4">
+            <span className="font-bold">Total Base:</span>
+            <span>{totalBase}</span>
           </li>
         </ul>
       </div>
     </div>
   );
 }
-

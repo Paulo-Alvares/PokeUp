@@ -59,7 +59,7 @@ export function FocusPokemon({
   const { theme } = useTheme();
 
   return (
-    <div className="bg-white dark:bg-[#2C2C2C] dark:text-white h-full w-2/6 rounded-[35px] p-4 flex flex-col items-center justify-between relative shadow-[2px_4px_11px_rgba(0,0,0,0.25)]">
+    <div className="bg-white dark:bg-[#2C2C2C] dark:text-white h-[77vh] w-2/6 rounded-[35px] p-4 flex flex-col items-center justify-between relative shadow-[2px_4px_11px_rgba(0,0,0,0.25)]">
       <p className="text-5xl font-semibold capitalize max-w-[90%] flex justify-between items-center">
         <span className="text-gray-500 text-xl font-semibold m-1">
           #{number}
