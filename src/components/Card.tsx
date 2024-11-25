@@ -19,6 +19,7 @@ import rockType from "../assets/type-icons/rock.svg";
 import steelType from "../assets/type-icons/steel.svg";
 import waterType from "../assets/type-icons/water.svg";
 import { useTheme } from "../Context/ThemeContext";
+import { useNavigate } from "react-router-dom";
 
 interface CardProps {
   primaryType: string;
@@ -57,9 +58,17 @@ export function Card({
   image,
 }: CardProps) {
   const { theme } = useTheme();
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(`/pokemon/${number}`);
+  };
 
   return (
-    <div className="bg-white dark:bg-[#2C2C2C] dark:text-white h-60 rounded-[35px] p-4 flex flex-col items-center justify-between relative shadow-[2px_4px_11px_rgba(0,0,0,0.25)] hover:-translate-y-2 duration-300 cursor-pointer">
+    <div
+      onClick={handleCardClick}
+      className="bg-white dark:bg-[#2C2C2C] dark:text-white h-60 rounded-[35px] p-4 flex flex-col items-center justify-between relative shadow-[2px_4px_11px_rgba(0,0,0,0.25)] hover:-translate-y-2 duration-300 cursor-pointer"
+    >
       <p className="text-lg font-semibold capitalize max-w-[90%] flex justify-between items-center overflow-hidden whitespace-nowrap">
         <span className="text-gray-500 text-xs font-semibold m-1 shrink-0">
           #{number}

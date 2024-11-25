@@ -81,30 +81,12 @@ export function Pokedex() {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-
-          {/* <div className="col-span-3 md:col-span-1 lg:col-start-4 xl:col-start-5 flex items-center bg-white dark:bg-[#2C2C2C] dark:text-white h-11 rounded-full shadow-md px-4">
-            <Funnel size={17} weight="bold" />
-            <select
-              id="selection"
-              value={generation}
-              onChange={(e) => setGeneration(e.target.value)}
-              className="w-full dark:bg-[#2C2C2C] dark:text-white text-base text-center font-semibold outline-none ml-2"
-            >
-              {Object.keys(generationRanges).map((gen) => (
-                <option key={gen} value={gen} className="font-semibold">
-                  {gen}
-                </option>
-              ))}
-            </select>
-          </div> */}
           <div
             onClick={toggleDropdown}
-            className="relative col-span-3 md:col-span-1 lg:col-start-4 xl:col-start-5 flex items-center bg-white dark:bg-[#2C2C2C] dark:text-white h-11 rounded-full shadow-md px-4 cursor-pointer font-semibold z-50 duration-300 hover:bg-[#DD2C00] hover:text-white"
+            className="relative col-span-3 md:col-span-1 lg:col-start-4 xl:col-start-5 flex items-center bg-white dark:bg-[#2C2C2C] dark:text-white h-11 rounded-full shadow-md px-4 cursor-pointer font-semibold z-50 duration-300 hover:bg-[#DD2C00] hover:text-white dark:hover:bg-[#DD2C00]"
           >
             <Funnel size={17} weight="bold" />
-            <div className="w-full text-center ml-2">
-              {generation}
-            </div>
+            <div className="w-full text-center ml-2">{generation}</div>
             {isOpen && (
               <div className="absolute top-full left-0 w-full rounded-md dropdown">
                 {Object.keys(generationRanges).map((gen) => (
@@ -114,7 +96,7 @@ export function Pokedex() {
                       setGeneration(gen);
                       setIsOpen(false);
                     }}
-                    className="bg-white dark:bg-[#2C2C2C] shadow-[2px_4px_11px_rgba(0,0,0,0.25)] text-center m-1 p-2 rounded-full cursor-pointer hover:-translate-y-2 text-black duration-300 hover:bg-[#DD2C00] hover:text-white"
+                    className="bg-white dark:bg-[#2C2C2C] dark:text-white shadow-[2px_4px_11px_rgba(0,0,0,0.25)] text-center m-1 p-2 rounded-full cursor-pointer hover:-translate-y-2 text-black duration-300 hover:bg-[#DD2C00] hover:text-white dark:hover:bg-[#DD2C00]"
                   >
                     {gen}
                   </div>
