@@ -19,9 +19,8 @@ import rockType from "../assets/type-icons/rock.svg";
 import steelType from "../assets/type-icons/steel.svg";
 import waterType from "../assets/type-icons/water.svg";
 import { useTheme } from "../Context/ThemeContext";
-import { useNavigate } from "react-router-dom";
 
-interface CardProps {
+interface FocusPokemonProps {
   primaryType: string;
   secondaryType: string | null;
   number: number;
@@ -50,44 +49,36 @@ const typeIcons: { [key: string]: { icon: string; color: string } } = {
   water: { icon: waterType, color: "#688fef" },
 };
 
-export function Card({
+export function FocusPokemon({
   primaryType,
   secondaryType,
   number,
   name,
   image,
-}: CardProps) {
+}: FocusPokemonProps) {
   const { theme } = useTheme();
-  const navigate = useNavigate();
-
-  const handleCardClick = () => {
-    navigate(`/pokemon/${number}`);
-  };
 
   return (
-    <div
-      onClick={handleCardClick}
-      className="bg-white dark:bg-[#2C2C2C] dark:text-white rounded-[35px] p-4 flex flex-col items-center justify-between relative shadow-[2px_4px_11px_rgba(0,0,0,0.25)] h-60 hover:-translate-y-2 duration-300 cursor-pointer"
-    >
-      <p className="text-lg font-semibold capitalize max-w-[90%] flex justify-between items-center overflow-hidden whitespace-nowrap">
-        <span className="text-gray-500 text-xs font-semibold m-1 shrink-0">
+    <div className="bg-white dark:bg-[#2C2C2C] dark:text-white h-full w-2/6 rounded-[35px] p-4 flex flex-col items-center justify-between relative shadow-[2px_4px_11px_rgba(0,0,0,0.25)]">
+      <p className="text-5xl font-semibold capitalize max-w-[90%] flex justify-between items-center">
+        <span className="text-gray-500 text-xl font-semibold m-1">
           #{number}
         </span>
-        <span className="overflow-hidden text-ellipsis">{name}</span>
+        <span>{name}</span>
       </p>
 
-      <div className="relative w-full flex items-center justify-center">
+      <div className="relative h-full w-full flex items-center justify-center">
         {theme === "light" ? (
-          <img src={backgroundCard} alt="background" className="h-[75%]" />
+          <img src={backgroundCard} alt="background" className="h-3/4" />
         ) : (
-          <img src={backgroundCardDark} alt="background" className="h-[75%]" />
+          <img src={backgroundCardDark} alt="background" className="h-3/4" />
         )}
-        <img src={image} alt={name} className="absolute h-[95%] z-10" />
+        <img src={image} alt={name} className="absolute h-full z-10" />
       </div>
 
-      <div className="flex gap-3">
+      <div className="flex gap-7">
         <div
-          className="w-8 h-8 rounded-full flex justify-center items-center"
+          className="w-12 h-12 rounded-full flex justify-center items-center"
           style={{ backgroundColor: typeIcons[primaryType].color }}
         >
           <img
@@ -98,7 +89,7 @@ export function Card({
         </div>
         {secondaryType && (
           <div
-            className="w-8 h-8 rounded-full flex justify-center items-center"
+            className="w-12 h-12 rounded-full flex justify-center items-center"
             style={{ backgroundColor: typeIcons[secondaryType].color }}
           >
             <img
