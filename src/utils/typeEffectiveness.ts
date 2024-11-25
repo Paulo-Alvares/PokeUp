@@ -1,4 +1,4 @@
-export const typeEffectiveness = {
+const typeEffectivenessData = {
   bug: {
     advantages: ["grass", "psychic", "dark"],
     weaknesses: ["fire", "flying", "rock"],
@@ -120,4 +120,6 @@ export const typeEffectiveness = {
   },
 } as const;
 
-export type TypeKey = keyof typeof typeEffectiveness;
+export type TypeKey = keyof typeof typeEffectivenessData;
+
+export const typeEffectiveness = typeEffectivenessData;

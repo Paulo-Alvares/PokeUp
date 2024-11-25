@@ -12,15 +12,11 @@ export function calculateEffectiveness(pokemonTypes: TypeKey[]) {
 
     effectiveness.advantages.forEach((t) => advantages.add(t));
 
-    effectiveness.immunities.forEach((t) => immunities.add(t));
-
-    Object.entries(typeEffectiveness).forEach(([otherType, otherEffectiveness]) => {
-      if (otherEffectiveness.advantages.includes(type)) {
-        weaknesses.add(otherType as TypeKey);
-      }
-    });
-
+    effectiveness.weaknesses.forEach((t) => weaknesses.add(t));
+    
     effectiveness.resistences.forEach((t) => resistences.add(t));
+    
+    effectiveness.immunities.forEach((t) => immunities.add(t));
   });
 
   immunities.forEach((type) => {
