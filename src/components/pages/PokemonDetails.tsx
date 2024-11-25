@@ -4,12 +4,16 @@ import axios from "axios";
 import { X } from "@phosphor-icons/react";
 import { PrevPokemon } from "../PrevPokemon";
 import { FocusPokemon } from "../FocusPokemon";
+import { Stats } from "../Stats";
+import { calculateEffectiveness } from "../../utils/calculateEffectiveness";
+import { TypeKey } from "../../utils/typeEffectiveness";
 
 interface PokemonDetailsProps {
   id: number;
   name: string;
   types: { type: { name: string } }[];
   sprites: { other: { "official-artwork": { front_default: string } } };
+  stats: { base_stat: number; stat: { name: string } }[];
 }
 
 export function PokemonDetails() {
@@ -54,6 +58,14 @@ export function PokemonDetails() {
     return <div>Loading...</div>;
   }
 
+  const pokemonTypes = pokemon.types
+    .map((type) => type.type.name as TypeKey)
+    .filter((type): type is TypeKey => type !== null);
+
+  const { advantages, weaknesses, resistances, immunities } = calculateEffectiveness(
+    pokemonTypes || []
+  );
+
   return (
     <div className="flex flex-col items-center p-7 gap-7 h-[100vh]">
       <div className="flex gap-7">
@@ -96,7 +108,7 @@ export function PokemonDetails() {
         />
       </div>
 
-      <div className="w-full h-full flex flex-col gap-7 items-center">
+      <div className="w-full h-full flex gap-7">
         <FocusPokemon
           primaryType={pokemon.types[0].type.name}
           secondaryType={pokemon.types[1] ? pokemon.types[1].type.name : null}
@@ -104,6 +116,23 @@ export function PokemonDetails() {
           name={pokemon.name}
           image={pokemon.sprites.other["official-artwork"].front_default}
         />
+
+        <div className="w-4/6">
+          <Stats
+            advantages={advantages}
+            weaknesses={weaknesses}
+            resistences={resistances}
+            immunities={immunities}
+            stats={{
+              hp: pokemon.stats[0].base_stat,
+              attack: pokemon.stats[1].base_stat,
+              defense: pokemon.stats[2].base_stat,
+              specialAttack: pokemon.stats[3].base_stat,
+              specialDefense: pokemon.stats[4].base_stat,
+              speed: pokemon.stats[5].base_stat,
+            }}
+          />
+        </div>
       </div>
     </div>
   );
