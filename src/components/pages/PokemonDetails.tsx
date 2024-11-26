@@ -8,6 +8,7 @@ import { Stats } from "../Stats";
 import { calculateEffectiveness } from "../../utils/calculateEffectiveness";
 import { TypeKey } from "../../utils/typeEffectiveness";
 import { Card } from "../Card";
+import { TypeRelation } from "../TypeRelation";
 
 interface PokemonDetailsProps {
   id: number;
@@ -137,6 +138,13 @@ export function PokemonDetails() {
           </div>
         )}
 
+        <p className="text-5xl font-semibold capitalize max-w-[90%] flex justify-between items-center">
+          <span className="text-gray-500 text-xl font-semibold m-1">
+            #{pokemon.id}
+          </span>
+          <span>{pokemon.name}</span>
+        </p>
+
         {nextPokemon && (
           <div
             onClick={() => navigate(`/pokemon/${nextPokemon.id}`)}
@@ -160,21 +168,25 @@ export function PokemonDetails() {
         />
       </div>
 
-      <div className="w-full h-full flex gap-7">
+      <div className="w-full h-[77vh] flex gap-7">
         <FocusPokemon
-          primaryType={pokemon.types[0].type.name}
-          secondaryType={pokemon.types[1] ? pokemon.types[1].type.name : null}
-          number={pokemon.id}
           name={pokemon.name}
           image={pokemon.sprites.other["official-artwork"].front_default}
+          ability={pokemon.ability}
+          description={pokemon.description}
+        />
+
+        <TypeRelation
+          primaryType={pokemon.types[0].type.name}
+          secondaryType={pokemon.types[1] ? pokemon.types[1].type.name : null}
+          advantages={advantages}
+          weaknesses={weaknesses}
+          resistences={resistances}
+          immunities={immunities}
         />
 
         <div className="w-4/6 h-[77vh] flex flex-col gap-7">
           <Stats
-            advantages={advantages}
-            weaknesses={weaknesses}
-            resistences={resistances}
-            immunities={immunities}
             stats={{
               hp: pokemon.stats[0].base_stat,
               attack: pokemon.stats[1].base_stat,
@@ -183,8 +195,6 @@ export function PokemonDetails() {
               specialDefense: pokemon.stats[4].base_stat,
               speed: pokemon.stats[5].base_stat,
             }}
-            ability={pokemon.ability}
-            description={pokemon.description}
           />
           <div className="flex items-center gap-5 justify-center">
             {evolutionChain.map((evo, index) => (
