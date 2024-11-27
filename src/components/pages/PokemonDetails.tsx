@@ -138,8 +138,8 @@ export function PokemonDetails() {
           </div>
         )}
 
-        <p className="text-5xl font-semibold capitalize max-w-[90%] flex justify-between items-center">
-          <span className="text-gray-500 text-xl font-semibold m-1">
+        <p className="text-5xl font-semibold capitalize flex flex-col items-center">
+          <span className="text-gray-500 text-sm font-semibold absolute top-3">
             #{pokemon.id}
           </span>
           <span>{pokemon.name}</span>
@@ -168,22 +168,21 @@ export function PokemonDetails() {
         />
       </div>
 
-      <div className="w-full h-[77vh] flex gap-7">
-        <FocusPokemon
-          name={pokemon.name}
-          image={pokemon.sprites.other["official-artwork"].front_default}
-          ability={pokemon.ability}
-          description={pokemon.description}
-        />
-
-        <TypeRelation
-          primaryType={pokemon.types[0].type.name}
-          secondaryType={pokemon.types[1] ? pokemon.types[1].type.name : null}
-          advantages={advantages}
-          weaknesses={weaknesses}
-          resistences={resistances}
-          immunities={immunities}
-        />
+      <div className="w-full flex gap-7">
+        <div className="w-1/2 flex flex-col gap-7">
+          <FocusPokemon
+            name={pokemon.name}
+            image={pokemon.sprites.other["official-artwork"].front_default}
+            primaryType={pokemon.types[0].type.name}
+            secondaryType={pokemon.types[1] ? pokemon.types[1].type.name : null}
+          />
+          <TypeRelation
+            advantages={advantages}
+            weaknesses={weaknesses}
+            resistences={resistances}
+            immunities={immunities}
+          />
+        </div>
 
         <div className="w-4/6 h-[77vh] flex flex-col gap-7">
           <Stats

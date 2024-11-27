@@ -1,8 +1,6 @@
-import { TypeIcon } from "./TypeIcon";
+import { TypeBlock } from "./TypeBlock";
 
 interface TypeRelationProps {
-  primaryType: string;
-  secondaryType: string | null;
   advantages?: string[];
   weaknesses?: string[];
   resistences?: string[];
@@ -10,57 +8,28 @@ interface TypeRelationProps {
 }
 
 export function TypeRelation({
-  primaryType,
-  secondaryType,
   advantages,
   weaknesses,
   resistences,
   immunities,
 }: TypeRelationProps) {
   return (
-    <div className="h-fit w-[15%] flex pt-4 pb-5 justify-center bg-white dark:bg-[#2C2C2C] rounded-[35px] shadow-[2px_4px_11px_rgba(0,0,0,0.25)]">
-      <div className="flex flex-col">
-        <div>
-          <h3 className="text-lg font-semibold dark:text-white mb-1">Tipos</h3>
-          {secondaryType
-            ? TypeIcon([primaryType, secondaryType])
-            : TypeIcon([primaryType])}
-        </div>
-
+    <div className="h-2/5 w-full py-2 px-4 bg-white dark:bg-[#2C2C2C] rounded-[35px] shadow-[2px_4px_11px_rgba(0,0,0,0.25)]">
+      <div className="grid grid-cols-4 gap-1">
         {advantages && advantages.length > 0 && (
-          <div>
-            <h3 className="text-lg font-semibold dark:text-white mb-1">
-              Vantagens
-            </h3>
-            {TypeIcon(advantages)}
-          </div>
+          <TypeBlock title="Vantagem" types={advantages} />
         )}
 
         {weaknesses && weaknesses.length > 0 && (
-          <div>
-            <h3 className="text-lg font-semibold dark:text-white mb-1">
-              Fraquezas
-            </h3>
-            {TypeIcon(weaknesses)}
-          </div>
+          <TypeBlock title="Fraqueza" types={weaknesses} />
         )}
 
         {resistences && resistences.length > 0 && (
-          <div>
-            <h3 className="text-lg font-semibold dark:text-white mb-1">
-              Resistências
-            </h3>
-            {TypeIcon(resistences)}
-          </div>
+          <TypeBlock title="Resistência" types={resistences} />
         )}
 
         {immunities && immunities.length > 0 && (
-          <div>
-            <h3 className="text-lg font-semibold dark:text-white mb-1">
-              Imunidades
-            </h3>
-            {TypeIcon(immunities)}
-          </div>
+          <TypeBlock title="Imunidade" types={immunities} />
         )}
       </div>
     </div>

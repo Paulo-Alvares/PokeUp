@@ -39,7 +39,15 @@ const typeIcons: { [key: string]: { icon: string; color: string } } = {
 };
 
 export const TypeIcon = (typeList: string[]) => (
-  <div className="grid grid-cols-3 gap-1">
+  <div
+    className="grid gap-2 w-fit"
+    style={{
+      gridTemplateColumns: `repeat(${Math.min(
+        typeList.length,
+        3
+      )}, minmax(0, 1fr))`,
+    }}
+  >
     {typeList.map((type) => (
       <div
         key={type}
