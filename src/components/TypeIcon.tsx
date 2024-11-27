@@ -44,7 +44,7 @@ export const TypeIcon = (typeList: string[]) => (
     style={{
       gridTemplateColumns: `repeat(${Math.min(
         typeList.length,
-        3
+        4
       )}, minmax(0, 1fr))`,
     }}
   >

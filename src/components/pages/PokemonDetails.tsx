@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { ArrowFatLinesRight, X } from "@phosphor-icons/react";
 import { PrevPokemon } from "../PrevPokemon";
 import { FocusPokemon } from "../FocusPokemon";
 import { Stats } from "../Stats";
 import { calculateEffectiveness } from "../../utils/calculateEffectiveness";
 import { TypeKey } from "../../utils/typeEffectiveness";
-import { Card } from "../Card";
 import { TypeRelation } from "../TypeRelation";
+import { EvolutionLine } from "../EvolutionLine";
+import { X } from "@phosphor-icons/react";
 
 interface PokemonDetailsProps {
   id: number;
@@ -121,11 +121,11 @@ export function PokemonDetails() {
 
   return (
     <div className="flex flex-col items-center p-7 gap-7 h-[100vh] overflow-hidden">
-      <div className="flex gap-7">
+      <div className="flex h-16 gap-7">
         {previousPokemon && (
           <div
             onClick={() => navigate(`/pokemon/${previousPokemon.id}`)}
-            className="cursor-pointer"
+            className="cursor-pointer absolute left-7"
           >
             <PrevPokemon
               number={previousPokemon.id}
@@ -138,8 +138,8 @@ export function PokemonDetails() {
           </div>
         )}
 
-        <p className="text-5xl font-semibold capitalize flex flex-col items-center">
-          <span className="text-gray-500 text-sm font-semibold absolute top-3">
+        <p className="text-5xl font-semibold capitalize items-center flex h-16 p-6 gap-3">
+          <span className="text-gray-500 text-sm font-semibold">
             #{pokemon.id}
           </span>
           <span>{pokemon.name}</span>
@@ -148,7 +148,7 @@ export function PokemonDetails() {
         {nextPokemon && (
           <div
             onClick={() => navigate(`/pokemon/${nextPokemon.id}`)}
-            className="cursor-pointer"
+            className="cursor-pointer absolute right-24"
           >
             <PrevPokemon
               number={nextPokemon.id}
@@ -169,52 +169,45 @@ export function PokemonDetails() {
       </div>
 
       <div className="w-full flex gap-7">
-        <div className="w-1/2 flex flex-col gap-7">
-          <FocusPokemon
-            name={pokemon.name}
-            image={pokemon.sprites.other["official-artwork"].front_default}
-            primaryType={pokemon.types[0].type.name}
-            secondaryType={pokemon.types[1] ? pokemon.types[1].type.name : null}
-          />
-          <TypeRelation
-            advantages={advantages}
-            weaknesses={weaknesses}
-            resistences={resistances}
-            immunities={immunities}
-          />
-        </div>
+        <FocusPokemon
+          name={pokemon.name}
+          image={pokemon.sprites.other["official-artwork"].front_default}
+          primaryType={pokemon.types[0].type.name}
+          secondaryType={pokemon.types[1] ? pokemon.types[1].type.name : null}
+          ability={pokemon.ability}
+        />
 
-        <div className="w-4/6 h-[77vh] flex flex-col gap-7">
-          <Stats
-            stats={{
-              hp: pokemon.stats[0].base_stat,
-              attack: pokemon.stats[1].base_stat,
-              defense: pokemon.stats[2].base_stat,
-              specialAttack: pokemon.stats[3].base_stat,
-              specialDefense: pokemon.stats[4].base_stat,
-              speed: pokemon.stats[5].base_stat,
-            }}
-          />
-          <div className="flex items-center gap-5 justify-center">
-            {evolutionChain.map((evo, index) => (
-              <div key={evo.id} className="flex items-center">
-                <Card
-                  primaryType={evo.types[0].type.name}
-                  secondaryType={evo.types[1] ? evo.types[1].type.name : null}
-                  number={evo.id}
-                  name={evo.name}
-                  image={evo.image}
-                />
-
-                {index < evolutionChain.length - 1 && (
-                  <span className="ml-6 text-xl dark:text-white text-black">
-                    <ArrowFatLinesRight size={35} weight="regular" />
-                  </span>
-                )}
-              </div>
-            ))}
+        <div className="w-7/12 h-[77vh] flex flex-col gap-7">
+          <div className="flex h-1/2 gap-7">
+            <div className="bg-white dark:bg-[#2C2C2C] dark:text-white w-1/2 p-4 flex flex-col gap-2 font-semibold rounded-[35px] shadow-[2px_4px_11px_rgba(0,0,0,0.25)]">
+              <p className="flex flex-col">
+                <span>{pokemon.description}</span>
+              </p>
+            </div>
+            <Stats
+              stats={{
+                hp: pokemon.stats[0].base_stat,
+                attack: pokemon.stats[1].base_stat,
+                defense: pokemon.stats[2].base_stat,
+                specialAttack: pokemon.stats[3].base_stat,
+                specialDefense: pokemon.stats[4].base_stat,
+                speed: pokemon.stats[5].base_stat,
+              }}
+            />
           </div>
+
+          <EvolutionLine
+            evolutionChain={evolutionChain}
+            currentPokemonId={pokemon.id}
+          />
         </div>
+
+        <TypeRelation
+          advantages={advantages}
+          weaknesses={weaknesses}
+          resistences={resistances}
+          immunities={immunities}
+        />
       </div>
     </div>
   );

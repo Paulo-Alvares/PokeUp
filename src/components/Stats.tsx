@@ -41,12 +41,11 @@ export function Stats({ stats }: StatsProps) {
     specialDefense: { min: 0, max: 250 },
     speed: { min: 0, max: 180 },
   };
-
+  
   return (
-    <div className="h-1/2 flex gap-4 pt-3 px-7 bg-white dark:bg-[#2C2C2C] overflow-hidden rounded-[35px] shadow-[2px_4px_11px_rgba(0,0,0,0.25)]">
-      <div className="flex flex-col flex-1">
-        <h3 className="text-lg font-semibold dark:text-white">Stats</h3>
-        <ul className="flex flex-col font-semibold">
+    <div className="w-1/2 flex gap-4 p-3 px-7 bg-white dark:bg-[#2C2C2C] overflow-hidden rounded-[35px] shadow-[2px_4px_11px_rgba(0,0,0,0.25)]">
+      <div className="flex flex-col flex-1 justify-center">
+        <ul className="flex flex-col font-semibold gap-1">
           {Object.keys(stats).map((key) => {
             const statKey = key as StatKeys;
             const statValue = stats[statKey];
@@ -56,27 +55,25 @@ export function Stats({ stats }: StatsProps) {
               ((statValue - statMin) / (statMax - statMin)) * 100;
 
             return (
-              <li className="flex h-1/6" key={statKey}>
-                <div className="flex items-center w-full gap-4">
-                  <span className="font-semibold dark:text-gray-300 w-1/5 text-right capitalize text-nowrap">
-                    {statLabels[statKey]}:
-                  </span>
+              <li className="flex items-center" key={statKey}>
+                <span className="font-semibold dark:text-gray-300 w-1/3 text-right capitalize text-nowrap">
+                  {statLabels[statKey]}:
+                </span>
 
-                  <div className="relative w-2/3 h-2 bg-gray-300 rounded-full overflow-hidden">
-                    <div
-                      className="absolute top-0 left-0 h-full bg-red-600 rounded-full duration-300"
-                      style={{ width: `${progressBarWidth}%` }}
-                    ></div>
-                  </div>
-
-                  <span>{statValue}</span>
+                <div className="relative w-2/3 h-2 bg-gray-300 rounded-full overflow-hidden mx-4">
+                  <div
+                    className="absolute top-0 left-0 h-full bg-red-600 rounded-full duration-300"
+                    style={{ width: `${progressBarWidth}%` }}
+                  ></div>
                 </div>
+
+                <span className="w-1/6">{statValue}</span>
               </li>
             );
           })}
-          <li className="flex gap-4">
-            <span className="font-bold">Total Base:</span>
-            <span>{totalBase}</span>
+          <li className="flex">
+            <span className="font-bold w-[calc(26%+2px)] flex justify-end">Total:</span>
+            <span className="w-2/3 mx-4">{totalBase}</span>
           </li>
         </ul>
       </div>

@@ -14,8 +14,8 @@ export function TypeRelation({
   immunities,
 }: TypeRelationProps) {
   return (
-    <div className="h-2/5 w-full py-2 px-4 bg-white dark:bg-[#2C2C2C] rounded-[35px] shadow-[2px_4px_11px_rgba(0,0,0,0.25)]">
-      <div className="grid grid-cols-4 gap-1">
+    <div className="w-2/12 py-2 px-4 max-h-[77vh] bg-white dark:bg-[#2C2C2C] flex items-center justify-center rounded-[35px] shadow-[2px_4px_11px_rgba(0,0,0,0.25)]">
+      <div className="flex flex-col gap-2 h-fit">
         {advantages && advantages.length > 0 && (
           <TypeBlock title="Vantagem" types={advantages} />
         )}

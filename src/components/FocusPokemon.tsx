@@ -8,6 +8,7 @@ interface FocusPokemonProps {
   image: string;
   primaryType: string;
   secondaryType: string | null;
+  ability: string;
 }
 
 export function FocusPokemon({
@@ -15,37 +16,43 @@ export function FocusPokemon({
   image,
   primaryType,
   secondaryType,
+  ability,
 }: FocusPokemonProps) {
   const { theme } = useTheme();
 
   return (
-    <div className="bg-white dark:bg-[#2C2C2C] dark:text-white h-3/5 rounded-[35px] flex flex-col items-center justify-center relative shadow-[2px_4px_11px_rgba(0,0,0,0.25)]">
-      <div className="relative h-full w-full flex items-center justify-center">
-        {theme === "light" ? (
-          <img src={backgroundCard} alt="background" className="h-3/4" />
-        ) : (
-          <img src={backgroundCardDark} alt="background" className="h-3/4" />
-        )}
-        <img src={image} alt={name} className="absolute h-full z-1" />
-      </div>
-
-      <div className="flex absolute top-4 left-4">
+    <div className="bg-white text-lg dark:bg-[#2C2C2C] dark:text-white w-3/12 max-h-[77vh] rounded-[35px] flex flex-col gap-7 items-center justify-center relative shadow-[2px_4px_11px_rgba(0,0,0,0.25)]">
+      <div className="w-full flex justify-center mt-4">
         {secondaryType
           ? TypeIcon([primaryType, secondaryType])
           : TypeIcon([primaryType])}
       </div>
 
-      {/* <div className="text-md font-semibold dark:text-white flex flex-col w-full gap-2">
-        <p>
-          <span className="text-lg dark:text-gray-300 font-bold">Habilidade:</span>
-          <span className="ml-1 capitalize">{ability}</span>
-        </p>
+      <div className="relative h-full w-full flex items-center justify-center">
+        {theme === "light" ? (
+          <img
+            src={backgroundCard}
+            alt="background"
+            className="h-3/5 object-contain"
+          />
+        ) : (
+          <img
+            src={backgroundCardDark}
+            alt="background"
+            className="h-3/5 object-contain"
+          />
+        )}
+        <img
+          src={image}
+          alt={name}
+          className="absolute h-4/5 z-1 object-contain"
+        />
+      </div>
 
-        <p>
-          <span className="text-lg dark:text-gray-300 font-bold">Descrição:</span>
-          <span className="ml-1">{description}</span>
-        </p>
-      </div> */}
+      <p className="mb-4">
+        <span className="dark:text-gray-300 font-bold">Habilidade:</span>
+        <span className="ml-1 capitalize font-medium">{ability}</span>
+      </p>
     </div>
   );
 }
