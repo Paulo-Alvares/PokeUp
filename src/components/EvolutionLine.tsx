@@ -25,6 +25,8 @@ export function EvolutionLine({
     );
   }
 
+  const cleanPokemonName = (name: string) => name.split("-")[0];
+
   return (
     <div className="bg-white h-60 dark:bg-[#2C2C2C] dark:text-white rounded-[35px] p-4 shadow-[2px_4px_11px_rgba(0,0,0,0.25)] flex justify-center gap-5">
       {evolutionChain.map((evo, index) => (
@@ -33,7 +35,7 @@ export function EvolutionLine({
             primaryType={evo.types[0].type.name}
             secondaryType={evo.types[1] ? evo.types[1].type.name : null}
             number={evo.id}
-            name={evo.name}
+            name={cleanPokemonName(evo.name)}
             image={evo.image}
             isCurrent={evo.id === currentPokemonId}
           />

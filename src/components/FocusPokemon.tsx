@@ -50,8 +50,8 @@ export function FocusPokemon({
       </div>
 
       <p className="mb-4">
-        <span className="dark:text-gray-300 font-bold">Habilidade:</span>
-        <span className="ml-1 capitalize font-medium">{ability}</span>
+        <span className="font-bold">Habilidade:</span>
+        <span className="ml-1 capitalize font-medium">{ability.replace(/-/g, " ")}</span>
       </p>
     </div>
   );

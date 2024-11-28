@@ -70,7 +70,7 @@ export function Card({
       className="bg-white dark:bg-[#2C2C2C] dark:text-white rounded-[35px] p-4 flex flex-col items-center justify-between relative shadow-[2px_4px_11px_rgba(0,0,0,0.25)] h-60 hover:-translate-y-2 duration-300 cursor-pointer"
     >
       <p className="text-lg font-semibold capitalize max-w-[90%] flex justify-between items-center overflow-hidden whitespace-nowrap">
-        <span className="text-gray-500 text-xs font-semibold m-1 shrink-0">
+        <span className="text-gray-500 dark:text-zinc-300 text-xs font-semibold m-1 shrink-0">
           #{number}
         </span>
         <span className="overflow-hidden text-ellipsis">{name}</span>

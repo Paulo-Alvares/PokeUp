@@ -56,7 +56,7 @@ export function Stats({ stats }: StatsProps) {
 
             return (
               <li className="flex items-center" key={statKey}>
-                <span className="font-semibold dark:text-gray-300 w-1/3 text-right capitalize text-nowrap">
+                <span className="font-semibold w-1/3 text-right capitalize text-nowrap">
                   {statLabels[statKey]}:
                 </span>
 

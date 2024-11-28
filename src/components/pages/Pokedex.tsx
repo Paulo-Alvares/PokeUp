@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card } from "../Card";
 import loader from "../../assets/backgroundCard.svg";
-import { CaretDown, Funnel, MagnifyingGlass } from "@phosphor-icons/react";
+import { CaretDown, CaretUp, Funnel, MagnifyingGlass } from "@phosphor-icons/react";
 import "../../index.css";
 import axios from "axios";
 import { Navbar } from "../Navbar";
@@ -37,6 +37,26 @@ export function Pokedex() {
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const handleOutsideClick = (event: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener("mousedown", handleOutsideClick);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [isOpen]);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
@@ -64,6 +84,8 @@ export function Pokedex() {
     pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const cleanPokemonName = (name: string) => name.split("-")[0];
+
   return (
     <>
       <Navbar />
@@ -82,6 +104,7 @@ export function Pokedex() {
             />
           </div>
           <div
+            ref={dropdownRef}
             onClick={toggleDropdown}
             className="relative col-span-3 md:col-span-1 lg:col-start-4 xl:col-start-5 flex items-center bg-white dark:bg-[#2C2C2C] dark:text-white h-11 rounded-full shadow-md px-4 cursor-pointer font-semibold z-50 duration-300 hover:bg-[#DD2C00] hover:text-white dark:hover:bg-[#DD2C00]"
           >
@@ -103,7 +126,11 @@ export function Pokedex() {
                 ))}
               </div>
             )}
-            <CaretDown size={17} weight="bold" />
+            {isOpen ? (
+              <CaretUp size={17} weight="bold" />
+            ) : (
+              <CaretDown size={17} weight="bold" />
+            )}
           </div>
         </div>
 
@@ -119,7 +146,7 @@ export function Pokedex() {
                 primaryType={pokemon.types[0]?.type.name}
                 secondaryType={pokemon.types[1]?.type.name}
                 number={pokemon.id}
-                name={pokemon.name}
+                name={cleanPokemonName(pokemon.name)}
                 image={pokemon.sprites.other["official-artwork"].front_default}
               />
             ))

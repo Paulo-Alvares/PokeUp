@@ -119,17 +119,19 @@ export function PokemonDetails() {
   const { advantages, weaknesses, resistances, immunities } =
     calculateEffectiveness(pokemonTypes || []);
 
+  const cleanPokemonName = (name: string) => name.split("-")[0];
+
   return (
-    <div className="flex flex-col items-center p-7 gap-7 h-[100vh] overflow-hidden">
+    <div className="flex flex-col dark:text-white items-center p-7 gap-7 h-[100vh] overflow-hidden">
       <div className="flex h-16 gap-7">
-        {previousPokemon && (
+        {(previousPokemon && pokemon.id !== 1) && (
           <div
             onClick={() => navigate(`/pokemon/${previousPokemon.id}`)}
             className="cursor-pointer absolute left-7"
           >
             <PrevPokemon
               number={previousPokemon.id}
-              name={previousPokemon.name}
+              name={cleanPokemonName(previousPokemon.name)}
               image={
                 previousPokemon.sprites.other["official-artwork"].front_default
               }
@@ -139,10 +141,10 @@ export function PokemonDetails() {
         )}
 
         <p className="text-5xl font-semibold capitalize items-center flex h-16 p-6 gap-3">
-          <span className="text-gray-500 text-sm font-semibold">
+          <span className="text-gray-500 dark:text-zinc-300 text-sm font-semibold">
             #{pokemon.id}
           </span>
-          <span>{pokemon.name}</span>
+          <span>{cleanPokemonName(pokemon.name)}</span>
         </p>
 
         {nextPokemon && (
@@ -152,7 +154,7 @@ export function PokemonDetails() {
           >
             <PrevPokemon
               number={nextPokemon.id}
-              name={nextPokemon.name}
+              name={cleanPokemonName(nextPokemon.name)}
               image={
                 nextPokemon.sprites.other["official-artwork"].front_default
               }
@@ -170,7 +172,7 @@ export function PokemonDetails() {
 
       <div className="w-full flex gap-7">
         <FocusPokemon
-          name={pokemon.name}
+          name={cleanPokemonName(pokemon.name)}
           image={pokemon.sprites.other["official-artwork"].front_default}
           primaryType={pokemon.types[0].type.name}
           secondaryType={pokemon.types[1] ? pokemon.types[1].type.name : null}

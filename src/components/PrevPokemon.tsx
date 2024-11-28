@@ -27,7 +27,7 @@ export function PrevPokemon({
   return (
     <div
       onClick={handleCardClick}
-      className="bg-white dark:bg-[#2C2C2C] dark:text-white rounded-[35px] relative w-64 h-16 p-6 flex gap-3 items-center justify-around shadow-[2px_4px_11px_rgba(0,0,0,0.25)] hover:-translate-y-2 duration-300 cursor-pointer"
+      className="bg-white dark:bg-[#2C2C2C] dark:text-white rounded-[35px] relative w-64 h-16 group p-6 flex gap-3 items-center justify-around shadow-[2px_4px_11px_rgba(0,0,0,0.25)] hover:-translate-y-2 duration-300 cursor-pointer"
     >
       <div className="relative w-16 flex items-center justify-center">
         {theme === "light" ? (
@@ -39,12 +39,12 @@ export function PrevPokemon({
       </div>
       <div className="flex flex-col justify-center items-center">
         {prevOrNext ? (
-          <ArrowLeft size={20} weight="bold" />
+          <ArrowLeft size={20} weight="bold" className="group-hover:text-red-600 duration-300" />
         ) : (
-          <ArrowRight size={20} weight="bold" />
+          <ArrowRight size={20} weight="bold" className="group-hover:text-red-600 duration-300" />
         )}
         <p className="text-lg font-semibold capitalize flex justify-between items-center">
-          <span className="text-gray-500 text-xs font-semibold m-1">
+          <span className="text-gray-500 dark:text-zinc-300 text-xs font-semibold m-1">
             #{number}
           </span>
           <span>{name}</span>

@@ -33,10 +33,10 @@ export function EvolutionCard({
   return (
     <div
       onClick={handleCardClick}
-      className={`dark:text-white p-2 gap-2 flex flex-col w-60 items-center rounded-[35px] relative h-full border-2 border-white ${
+      className={`dark:text-white p-2 gap-2 flex flex-col w-60 items-center rounded-[35px] relative h-full border-2 dark:border-[#2C2C2C] border-white ${
         isCurrent
-          ? "cursor-default border-zinc-300"
-          : "hover:border-red-600 cursor-pointer duration-300"
+          ? "cursor-default border-zinc-300 dark:border-zinc-600"
+          : "hover:border-red-600 hover:dark:border-red-600 cursor-pointer duration-300"
       }`}
     >
       <p className="text-lg font-semibold capitalize max-w-[90%] flex justify-between items-center">
